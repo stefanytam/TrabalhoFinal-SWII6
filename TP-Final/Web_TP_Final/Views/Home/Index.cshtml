@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    @model IEnumerable<Produto>
+}
+<a asp-action="AddProduto" class="btn btn-sm btn-primary" id="btn">Adicionar um Produto</a>
+<div class="text-center">
+    <table class="table table-sm table-striped table-bordered m-2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Status</th>
+                <th>Cadastrado por</th>
+                <th>Ultima atualização por</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.Id</td>
+                    <td>@r.Nome</td>
+                    <td>@r.Preco</td>
+                    <td>@r.Status</td>
+                    <td>@(r.UsuarioCadastro != null ? r.UsuarioCadastro.Nome : "N/A")</td>
+                    <td>@(r.UsuarioUpdate != null ? r.UsuarioUpdate.Nome : "N/A")</td>
+                    <td>
+                        <a asp-action="UpdateProdutoById" asp-route-id="@r.Id">Atualizar</a>
+                    </td>
+                    <td>
+                        <a asp-action="DeleteProduto" asp-route-id="@r.Id">Apagar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
